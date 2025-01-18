@@ -178,14 +178,14 @@ export default function Page({ agentId }: { agentId: UUID }) {
                             >
                                 <ChatBubble
                                     variant={variant}
-                                    className="flex flex-row items-center gap-2"
+                                    className="relative"
                                 >
                                     {message?.user !== "user" ? (
-                                        <Avatar className="size-8 p-1 border rounded-full select-none">
-                                            <AvatarImage src="/elizaos-icon.png" />
+                                        <Avatar className="size-12 border-2 rounded-full select-none overflow-hidden absolute -left-2 -top-2 z-10">
+                                            <AvatarImage src="/profile-pic.png" />
                                         </Avatar>
                                     ) : null}
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col pl-14">
                                         <ChatBubbleMessage
                                             isLoading={message?.isLoading}
                                         >
@@ -221,46 +221,6 @@ export default function Page({ agentId }: { agentId: UUID }) {
                                                 )}
                                             </div>
                                         </ChatBubbleMessage>
-                                        <div className="flex items-center gap-4 justify-between w-full mt-1">
-                                            {message?.text &&
-                                            !message?.isLoading ? (
-                                                <div className="flex items-center gap-1">
-                                                    <CopyButton
-                                                        text={message?.text}
-                                                    />
-                                                    <ChatTtsButton
-                                                        agentId={agentId}
-                                                        text={message?.text}
-                                                    />
-                                                </div>
-                                            ) : null}
-                                            <div
-                                                className={cn([
-                                                    message?.isLoading
-                                                        ? "mt-2"
-                                                        : "",
-                                                    "flex items-center justify-between gap-4 select-none",
-                                                ])}
-                                            >
-                                                {message?.source ? (
-                                                    <Badge variant="outline">
-                                                        {message.source}
-                                                    </Badge>
-                                                ) : null}
-                                                {message?.action ? (
-                                                    <Badge variant="outline">
-                                                        {message.action}
-                                                    </Badge>
-                                                ) : null}
-                                                {message?.createdAt ? (
-                                                    <ChatBubbleTimestamp
-                                                        timestamp={moment(
-                                                            message?.createdAt
-                                                        ).format("LT")}
-                                                    />
-                                                ) : null}
-                                            </div>
-                                        </div>
                                     </div>
                                 </ChatBubble>
                             </animated.div>
